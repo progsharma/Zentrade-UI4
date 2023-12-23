@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      background-color: #333; /* Dark grey background color */
+      color: #fff; /* Text color */
+    }
+
+    /* Header Style */
+    header {
+      text-align: center;
+      margin-bottom: 10px; /* Reduced margin */
+    }
+
+    /* SMART Style */
+    .smart {
+      color: #4CAF50;
+    }
+
+    /* SERV Style */
+    .serv {
+      color: #fff;
+    }
+
+    .black-box {
+      background-color: #000; /* Black background color for the box */
+      padding: 20px; /* Adjusted padding */
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 12px; /* Adjusted margin */
+    }
+
+    input {
+      padding: 8px; /* Adjusted padding */
+      margin-bottom: 16px; /* Adjusted margin */
+      width: 200px; /* Adjusted width */
+    }
+
+    button {
+      padding: 12px; /* Adjusted padding */
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Forgot Password Link Style */
+    a {
+      color: #ddd; /* Dark white color */
+      text-decoration: underline; /* Underline added */
+      margin-top: 8px;
+      cursor: pointer;
+      font-size: 12px; /* Reduced font size */
+      margin-left: 5px; /* Shifted to the left */
+    }
+
+    /* Logo Style */
+    img {
+      max-width: 1cm; /* Maximum width of 1cm */
+      max-height: 1cm; /* Maximum height of 1cm */
+      margin-bottom: 2px; /* Adjusted margin for the logo */
+    }
+  </style>
+  <script>
+    function validateForm() {
+      // Validate email format
+      var emailInput = document.getElementById('username');
+      var emailRegex = /^\S+@\S+\.\S+$/;
+      if (!emailRegex.test(emailInput.value)) {
+        alert('Please enter a valid email address.');
+        return false;
+      }
+
+      // Validate password format
+      var passwordInput = document.getElementById('password');
+      var passwordValue = passwordInput.value;
+      var passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@]{6,}$/;
+      if (!passwordRegex.test(passwordValue)) {
+        alert('Password must contain an uppercase letter, a number, and no special characters except @.');
+        return false;
+      }
+
+      // Check for specific password to redirect to the dashboard link
+      if (passwordValue === 'SmartServTest@123') {
+        window.location.href = 'https://open-to-cors.s3.amazonaws.com/dashboard2.png';
+        return false; // Prevent form submission
+      } else {
+        alert('Incorrect password. Please try again.');
+        return false; // Prevent form submission
+      }
+    }
+
+    function openForgotPasswordEmailClient() {
+      // Open default email client with pre-filled email to support@smartserv.io
+      window.location.href = 'mailto:support@smartserv.io?subject=Forgot%20Password&body=Please%20reset%20my%20password.';
+    }
+  </script>
+  <title>Login Page</title>
+</head>
+<body>
+  <div class="black-box">
+    <header>
+      <!-- Logo -->
+      <img src="C:\Users\rajanpri\Desktop\project\logo.png" alt="SmartServ Logo">
+      <h1><span class="smart">SMART</span><span class="serv">SERV</span></h1>
+    </header>
+    <form id="login-form" onsubmit="return validateForm()">
+      <!-- Username Field -->
+      <label for="username">Email:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your email" required>
+      
+      <!-- Password Field -->
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+      <!-- Submit Button -->
+      <button type="submit">Login</button>
+
+      <!-- Forgot Password Link -->
+      <a href="#" onclick="openForgotPasswordEmailClient()">Forgot your password?</a>
+    </form>
+  </div>
+</body>
+</html>
